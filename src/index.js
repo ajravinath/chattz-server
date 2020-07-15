@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
-const app = express();
-const server = require('http').Server(app);
-const io = require('socket.io').listen(server);
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io').listen(server);
 
 process.env.PUBLIC_FOLDER = `${process.cwd()}/public`;
 const publicDir = process.env.PUBLIC_FOLDER;
@@ -19,5 +19,5 @@ io.on('connection', function (socket) {
 });
 
 server.listen(process.env.PORT || 3000, function () {
-  console.log('listening on *:' + port);
+  console.log('listening on *:' + process.env.PORT || 3000);
 });
