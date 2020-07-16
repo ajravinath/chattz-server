@@ -1,3 +1,5 @@
+const format = require('date-fns/format');
+
 /**
  *
  * @param {string} id
@@ -5,12 +7,13 @@
  * @param {string} text
  * @returns {Object}
  */
-const formatMessage = (id, username, text) => {
+const formatMessage = (id, username, text, isMe = false) => {
   return {
     id,
     username,
-    time: new Date(),
-    text
+    time: format(new Date(), 'h:mm a'),
+    text,
+    isMe
   };
 };
 

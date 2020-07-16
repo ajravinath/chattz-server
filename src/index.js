@@ -18,14 +18,40 @@ app.get('/', function (req, res) {
 
 io.on('connection', function (socket) {
   socket.on('join', function ({ username, password }) {
+    console.log('username:', username);
     joinUser(socket.id, username);
-    io.emit('join', formatMessage(socket.id, username, ''));
+    io.emit(
+      'message',
+      formatMessage(socket.id, 'bot', `${username} joined the chat`)
+    );
   });
 
   socket.on('chat-message', function (msg) {
     const user = findUser(socket.id);
     if (user) {
-      io.emit('chat-message', formatMessage(user.id, user.username, msg));
+      socket.broadcast.emit(
+        'chat-message',
+        formatMessage(user.id, user.username, msg)
+      );
+      socket.emit(
+        'chat-message',
+        formatMessage(user.id, user.username, msg, true)
+      );
+    }
+  });
+
+  socket.on('disconnect', reason => {
+    console.log('disconnect', reason);
+    if (reason === 'io server disconnect') {
+      socket.connect();
+    } else {
+      const user = findUser(socket.id);
+      if (user) {
+        io.emit(
+          'message',
+          formatMessage(socket.id, 'bot', `${user.username} has left the chat`)
+        );
+      }
     }
   });
 });
