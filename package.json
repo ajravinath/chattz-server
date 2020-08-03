@@ -6,12 +6,12 @@
   "scripts": {
     "start": "env-cmd -f ./.env.staging cross-env DATABASE_URL=$(heroku config:get DATABASE_URL -a chattz) node src/index",
     "migrate": "env-cmd -f ./.env.staging cross-env DATABASE_URL=$(heroku config:get DATABASE_URL -a chattz) node ./src/db/dbConnection createAllTables",
-    "setup": "npm-run-all migrate start",
+    "setup": "npm-run-all -s migrate start",
     "start:dev": "env-cmd -f ./.env node src/index",
     "migrate:dev": "env-cmd -f ./.env node ./src/db/dbConnection createAllTables",
     "setup:dev": "npm-run-all migrate:dev start:dev",
     "develop": "env-cmd -f ./.env nodemon src/index",
-    "build": "env-cmd -f ./.env yarn build"
+    "build": "npm-run-all setup"
   },
   "keywords": [],
   "author": "",
