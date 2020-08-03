@@ -15,10 +15,8 @@ process.on('unhandledRejection', err => {
   process.exit(1);
 });
 
-server.listen(process.env.SERVER_PORT || '3000', () => {
-  console.log(
-    `server will listen on port ${process.env.SERVER_PORT || '3000'}`
-  );
+server.listen(process.env.PORT || '3000', () => {
+  console.log(`server will listen on port ${process.env.PORT || '3000'}`);
 });
 
 const io = socketIo.listen(server);
