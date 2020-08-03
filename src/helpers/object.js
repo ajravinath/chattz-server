@@ -7,17 +7,21 @@ module.exports = {
   },
 
   parseDbString(databaseUrl) {
-    const dbString = databaseUrl.split('://')[1];
-    const [firstPart, database] = dbString.split('/');
-    const [user, passwordHost, port] = firstPart.split(':');
-    const [password, host] = passwordHost.split('@');
+    console.log('databaseUrl:', databaseUrl);
+    if (databaseUrl) {
+      const dbString = databaseUrl.split('://')[1];
+      const [firstPart, database] = dbString.split('/');
+      const [user, passwordHost, port] = firstPart.split(':');
+      const [password, host] = passwordHost.split('@');
 
-    return {
-      user: user,
-      database: database,
-      password: password,
-      port: port,
-      host: host
-    };
+      return {
+        user: user,
+        database: database,
+        password: password,
+        port: port,
+        host: host
+      };
+    }
+    return null;
   }
 };
