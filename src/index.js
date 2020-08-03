@@ -20,5 +20,5 @@ server.listen(process.env.PORT || '3000', () => {
 });
 
 const io = socketIo.listen(server);
-io.set('origins', 'http://localhost:1234/chattz http://chattz.surge.sh');
+io.set('origins', 'http://localhost:* http://chattz.surge.sh:*');
 io.of('/chattz').on('connection', socket => onConnected(socket, io));
