@@ -1,5 +1,5 @@
 const format = require('date-fns/format');
-
+const objectHelper = require('../helpers/object');
 /**
  *
  * @param {string} id
@@ -17,6 +17,15 @@ const formatMessage = (id, username, text, isMe = false) => {
   };
 };
 
+const formatChatMessage = (user, text) => {
+  return {
+    ...objectHelper.snakeToCamel(user),
+    text,
+    time: format(new Date(), 'h:mm a')
+  };
+};
+
 module.exports = {
-  formatMessage
+  formatMessage,
+  formatChatMessage
 };
