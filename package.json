@@ -10,8 +10,7 @@
     "start:dev": "env-cmd -f ./.env node src/index",
     "migrate:dev": "env-cmd -f ./.env node ./src/db/dbConnection createAllTables",
     "setup:dev": "npm-run-all migrate:dev start:dev",
-    "develop": "env-cmd -f ./.env nodemon src/index",
-    "build": "npm-run-all setup"
+    "develop": "env-cmd -f ./.env nodemon src/index"
   },
   "keywords": [],
   "author": "",
