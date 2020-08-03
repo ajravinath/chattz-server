@@ -1,4 +1,5 @@
 const { Pool } = require('pg');
+const { parseDbString } = require('../helpers/object');
 
 const ssl =
   process.env.SSL_DB === 'true'
@@ -10,8 +11,21 @@ const ssl =
       }
     : {};
 
+// const dbString = process.env.DATABASE_URL.split('://')[1];
+// const [firstPart, database] = dbString.split('/');
+// const [username, passwordHost, port] = firstPart.split(':');
+// const [password, host] = passwordHost.split('@');
+
+const { user, database, password, port, host } = parseDbString(
+  process.env.DATABASE_URL
+);
+
 const config = {
-  connectionString: `${process.env.DATABASE_URL}`,
+  user: user,
+  database: database,
+  password: password,
+  port: port,
+  host: host,
   max: 10,
   idleTimeoutMillis: 30000,
   ...ssl
