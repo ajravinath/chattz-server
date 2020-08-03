@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "env-cmd -f ./.env.staging cross-env DATABASE_URL=$(heroku config:get DATABASE_URL -a chattz) node src/index",
-    "migrate": "env-cmd -f ./.env.staging cross-env DATABASE_URL=$(heroku config:get DATABASE_URL -a chattz) node ./src/db/dbConnection createAllTables",
+    "start": "env-cmd -f ./.env.staging cross-env node src/index",
+    "migrate": "env-cmd -f ./.env.staging cross-env node ./src/db/dbConnection createAllTables",
     "setup": "npm-run-all -s migrate start",
     "start:dev": "env-cmd -f ./.env node src/index",
     "migrate:dev": "env-cmd -f ./.env node ./src/db/dbConnection createAllTables",
